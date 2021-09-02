@@ -2,7 +2,7 @@ import numpy as np
 
 class Deck:
     '''Represents a deck of cards. Optimized for
-    dealing NLHE hands thousands of times.
+    dealing NLHE thousands of times.
     '''
 
     def __init__(self) -> None:
@@ -19,14 +19,53 @@ class Deck:
         np.random.shuffle(self.deck)
         self.above_top_card_ptr = 52
 
-    def deal_hand(self) -> None:
+    def deal_cards(self, num_cards: int, with_burn=True) -> np.ndarray:
+        '''Randomly deals cards from deck.
+
+        Args:
+            num_cards: the number of cards to deal from the deck.
+            with_burn: whether or not to burn a card before dealing.
+
+        Returns: ints representing cards in a numpy array, sorted for
+            later efficiency.
+        '''
+        if with_burn:
+            self.above_top_card_ptr -= 1
+
+        dealt = self.deck[self.above_top_card_ptr-num_cards:self.above_top_card_ptr]
+        self.above_top_card_ptr -= num_cards
+        return np.sort(dealt)
+
+    def deal_hand(self) -> np.ndarray:
         '''Randomly selects two cards from deck without
         replacement.
 
-        Returns: two ints in a tuple, sorted for later efficiency.
+        Returns: two ints in a numpy array, sorted for later
+            efficiency.
         '''
-        # Creating temp variable for readability.
-        hand = self.deck[self.above_top_card_ptr-2:self.above_top_card_ptr]
-        self.above_top_card_ptr -= 2
-        return np.sort(hand)
+        return self.deal_cards(num_cards=2, with_burn=False)
 
+    def deal_flop(self) -> np.ndarray:
+        '''Randomly flops three cards from deck without
+        replacement.
+
+        Returns: three ints in a numpy array, sorted for later
+            efficiency.
+        '''
+        return self.deal_cards(num_cards=3, with_burn=True)
+
+    def deal_turn(self) -> np.ndarray:
+        '''Randomly turns a card from deck without
+        replacement.
+
+        Returns: an int in a numpy array.
+        '''
+        return self.deal_cards(num_cards=1, with_burn=True)
+
+    def deal_river(self) -> np.ndarray:
+        '''Randomly rivers a card from deck without
+        replacement.
+
+        Returns: an int in a numpy array.
+        '''
+        return self.deal_cards(num_cards=1, with_burn=True)

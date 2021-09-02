@@ -1,4 +1,4 @@
-from utils import pretty_print_card, pretty_print_hand
+from utils import pretty_print_card, pretty_print_cards
 from deck import Deck
 
 class TestUtils():
@@ -13,4 +13,9 @@ class TestUtils():
     def test_pretty_print_hand_works_property(self):
         deck = Deck()
         hand = deck.deal_hand()
-        assert pretty_print_hand(hand) == 'Qs,Ks'
+        assert pretty_print_cards(hand) == 'Qs,Ks'
+
+    def test_pretty_print_flop_works_property(self):
+        deck = Deck()
+        hand = deck.deal_flop()
+        assert pretty_print_cards(hand) == '10s,Js,Qs'

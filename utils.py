@@ -39,13 +39,16 @@ def pretty_print_card(card_number: int) -> str:
 
     return card_value + card_suit
 
-def pretty_print_hand(hand: np.ndarray) -> str:
-    '''Formats dealt hand to be human-readable.
+def pretty_print_cards(cards: np.ndarray) -> str:
+    '''Formats dealt cards to be human-readable.
 
-    Args: hand, two cards randomly dealt w/out
+    Args: cards, cards randomly dealt w/out
         replacement from the deck.
 
     Returns: string of the form 'Ah,2c'.
     '''
-    return (pretty_print_card(hand[0]) + ',' +
-        pretty_print_card(hand[1]))
+    card_strings = []
+    for card_idx in range(len(cards)):
+        card_strings.append(pretty_print_card(cards[card_idx]))
+
+    return ','.join(card_strings)
