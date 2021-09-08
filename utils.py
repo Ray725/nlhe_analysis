@@ -52,3 +52,35 @@ def pretty_print_cards(cards: np.ndarray) -> str:
         card_strings.append(pretty_print_card(cards[card_idx]))
 
     return ','.join(card_strings)
+
+def determine_hand_status(hand: np.ndarray, board: np.ndarray) -> np.ndarray:
+    '''Returns the types of hands made or semi-made.
+    '''
+    hands = {
+        'high_card_in_hand': 0,
+        'two_high_cards_in_hand': 1,
+        'under_pair': 2,
+        'pair': 3,
+        'top pair': 4,
+        'over_pair': 5,
+        'two_pair': 6,
+        'set': 7,
+        'backdoor_straight_draw': 8,
+        'straight_draw': 9,
+        'straight': 10,
+        'backdoor_flush_draw': 11,
+        'flush_draw': 12,
+        'flush': 13,
+        'full_house': 14,
+        'quads': 15,
+        'straight_flush': 16
+    }
+
+    # analyze for card values
+    # analyze for card matching combos
+    # analyze for straights
+    # analyze for flushes
+    # analyze for straight flushes
+
+def pretty_print_hand_status(hand_status_array: np.ndarray) -> str:
+    pass

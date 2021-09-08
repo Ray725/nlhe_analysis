@@ -16,7 +16,7 @@ class Deck:
 
     def reset_deck_and_shuffle(self) -> None:
         '''Returns all cards to deck.'''
-        np.random.shuffle(self.deck)
+        self.shuffle()
         self.above_top_card_ptr = 52
 
     def deal_cards(self, num_cards: int, with_burn=True) -> np.ndarray:

@@ -1,0 +1,4 @@
+- break down pretty printing cards into modular functions
+- determine made and semi-made hands on flop
+- deal a specific hand for analyzing
+- probability of improvement on turn
